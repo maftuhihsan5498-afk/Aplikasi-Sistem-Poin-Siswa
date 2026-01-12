@@ -2,38 +2,38 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto" x-data="{
-            showModal: false,
-            selectedSiswa: null,
+                showModal: false,
+                selectedSiswa: null,
 
-            openModal(siswa) {
-                this.selectedSiswa = siswa;
-                this.showModal = true;
-            },
-            closeModal() {
-                this.showModal = false;
-            },
-            get filteredViolations() {
-                if (!this.selectedSiswa || !this.selectedSiswa.poins) return [];
-                return this.selectedSiswa.poins.filter(p => p.jenis === 'pelanggaran');
-            },
-            get filteredAchievements() {
-                if (!this.selectedSiswa || !this.selectedSiswa.poins) return [];
-                return this.selectedSiswa.poins.filter(p => p.jenis === 'prestasi');
-            },
-            get totalPoints() {
-                 if (!this.selectedSiswa || !this.selectedSiswa.poins) return 0;
-                 // Calculate total points: Achievement - Violation
-                 let achievements = this.selectedSiswa.poins.filter(p => p.jenis === 'prestasi').reduce((sum, p) => p.jumlah + sum, 0);
-                 let violations = this.selectedSiswa.poins.filter(p => p.jenis === 'pelanggaran').reduce((sum, p) => p.jumlah + sum, 0);
-                 return achievements - violations;
-            },
-            get violationCount() {
-                return this.filteredViolations.length;
-            },
-            get achievementCount() {
-                return this.filteredAchievements.length;
-            }
-        }">
+                openModal(siswa) {
+                    this.selectedSiswa = siswa;
+                    this.showModal = true;
+                },
+                closeModal() {
+                    this.showModal = false;
+                },
+                get filteredViolations() {
+                    if (!this.selectedSiswa || !this.selectedSiswa.poins) return [];
+                    return this.selectedSiswa.poins.filter(p => p.jenis === 'pelanggaran');
+                },
+                get filteredAchievements() {
+                    if (!this.selectedSiswa || !this.selectedSiswa.poins) return [];
+                    return this.selectedSiswa.poins.filter(p => p.jenis === 'prestasi');
+                },
+                get totalPoints() {
+                     if (!this.selectedSiswa || !this.selectedSiswa.poins) return 0;
+                     // Calculate total points: Achievement - Violation
+                     let achievements = this.selectedSiswa.poins.filter(p => p.jenis === 'prestasi').reduce((sum, p) => p.jumlah + sum, 0);
+                     let violations = this.selectedSiswa.poins.filter(p => p.jenis === 'pelanggaran').reduce((sum, p) => p.jumlah + sum, 0);
+                     return achievements - violations;
+                },
+                get violationCount() {
+                    return this.filteredViolations.length;
+                },
+                get achievementCount() {
+                    return this.filteredAchievements.length;
+                }
+            }">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <h2 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
@@ -59,7 +59,7 @@
 
         <!-- Search & Filter Bar -->
         <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6">
-            <form action="{{ route('admin.siswa.index') }}" method="GET" class="flex flex-col md:flex-row gap-4">
+            <form action="{{ url()->current() }}" method="GET" class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1 relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
