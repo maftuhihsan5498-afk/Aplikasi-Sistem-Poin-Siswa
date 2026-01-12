@@ -15,7 +15,13 @@ class DashboardController extends Controller
 
         if (!$siswa) {
             // Handle case where siswa data is missing for user
-            return view('siswa.dashboard', ['error' => 'Data siswa not found']);
+            return view('siswa.dashboard', [
+                'siswa' => null,
+                'totalPrestasi' => 0,
+                'totalPelanggaran' => 0,
+                'totalAkhir' => 0,
+                'riwayat' => []
+            ]);
         }
 
         $totalPrestasi = $siswa->totalPoinPrestasi();
